@@ -1,4 +1,12 @@
-const Home = () => {
+import { trpc } from '@/utils/trpc';
+import type { NextPage } from 'next'
+
+const Home: NextPage = () => {
+  const {data, isLoading} = trpc.useQuery(["hello", {text: "Daniel"}]);
+
+  if (isLoading) return <div>is loading</div>;
+  if (data) return <div>{data.greeting}</div>;
+
   return (
     <>
     <div className="absolute w-full h-full flex justify-center items-center bg-slate-800">
@@ -13,4 +21,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Home;
