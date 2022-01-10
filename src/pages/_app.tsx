@@ -1,14 +1,20 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
 import { withTRPC } from '@trpc/next';
-import type { AppProps } from 'next/app'
-import type { AppRouter } from "@/backend/router";
-
+import type { AppProps } from 'next/app';
+import type { AppRouter } from '@/backend/router';
+/**
+ * @param {AppProps} {Component, pageProps}
+ * @return {JSX.Element} The 'base component'
+ */
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  return <Component {...pageProps} />;
 }
 
+/**
+ * @return {String} Base url
+ */
 function getBaseURL(): String {
-  if (process.browser) return ""; // Browser should use current path
+  if (process.browser) return ''; // Browser should use current path
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`; // SSR should use vercel url
 
   return `http://localhost:${process.env.PORT ?? 3000}`;
@@ -35,4 +41,3 @@ export default withTRPC<AppRouter>({
    */
   ssr: true,
 })(MyApp);
-
